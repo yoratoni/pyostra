@@ -8,8 +8,8 @@ class Logger:
     @staticmethod
     def pyprint(
         log_type: str,
-        title: str,
         log: str,
+        status_code: int = None,
         forced_log: bool = False,
         same_line: bool = False,
         include_path = False
@@ -25,8 +25,8 @@ class Logger:
 
         Args:
             log_type (str): Type of the log (Unsupported title returns white colored log).
-            title (str): The title of the log.
             log (str): Printed log message.
+            status_code (int, optional): The status code corresponding to the one in the settings.
             include_path (bool, optional): Include the path in the log. Defaults to False.
             forced_log (bool, optional): Force even if not in debug mode. Defaults to False.
             same_line (bool, optional): Print over the previous line.
@@ -53,10 +53,10 @@ class Logger:
                 else:
                     print_log_type = f'[{log_type}]'
                 
-                if len(title) == 0:
+                if status_code is None:
                     output = f'{color}{print_log_type} {log}{Style.RESET_ALL}'
                 else:
-                    output = f'{color}{print_log_type} {title}: {log}{Style.RESET_ALL}'
+                    output = f'{color}{print_log_type} {status_code}: {GlobalSettings.status_codes[status_code]}{Style.RESET_ALL}'
                 
                 if same_line:
                     print_end = '\r'
@@ -119,6 +119,6 @@ class Logger:
             output = f'{name}: {res}{units[i]}'
         
         if print_msg:
-            Logger.pyprint('SUCCESS', '', output, True)
+            Logger.pyprint('SUCCESS', output, forced_log=True)
         
         return output
