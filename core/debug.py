@@ -11,8 +11,7 @@ class Logger:
         log: str,
         status_code: int = None,
         forced_log: bool = False,
-        same_line: bool = False,
-        include_path = False
+        same_line: bool = False
     ):
         '''Debug Mode formatted print statements.
         
@@ -30,7 +29,6 @@ class Logger:
             include_path (bool, optional): Include the path in the log. Defaults to False.
             forced_log (bool, optional): Force even if not in debug mode. Defaults to False.
             same_line (bool, optional): Print over the previous line.
-            include_path (bool, optional): Include the path in the log. Defaults to False.
         '''
         
         if not GlobalSettings.dist_mode and (GlobalSettings.verbose_debugging or forced_log):
@@ -47,16 +45,10 @@ class Logger:
                 elif log_type == GlobalSettings.debug_types[4]:
                     color = Fore.LIGHTGREEN_EX
                 
-                
-                if include_path:
-                    print_log_type = f'[{log_type} - {__file__}]'
-                else:
-                    print_log_type = f'[{log_type}]'
-                
                 if status_code is None:
-                    output = f'{color}{print_log_type} {log}{Style.RESET_ALL}'
+                    output = f'{color}[{log_type}] {log}{Style.RESET_ALL}'
                 else:
-                    output = f'{color}{print_log_type} {status_code}: {GlobalSettings.status_codes[status_code]}{Style.RESET_ALL}'
+                    output = f'{color}[{log_type}::{status_code}]: {GlobalSettings.status_codes[status_code]}{Style.RESET_ALL}'
                 
                 if same_line:
                     print_end = '\r'
