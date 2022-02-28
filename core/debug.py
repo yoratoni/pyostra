@@ -48,7 +48,7 @@ class Logger:
                 if status_code is None:
                     output = f'{color}[{log_type}] {log}{Style.RESET_ALL}'
                 else:
-                    output = f'{color}[{log_type}::{status_code}]: {GlobalSettings.status_codes[status_code]}{Style.RESET_ALL}'
+                    output = f'{color}[STATUS_{status_code}]: {GlobalSettings.status_codes[status_code]}{Style.RESET_ALL}'
                 
                 if same_line:
                     print_end = '\r'
