@@ -67,7 +67,13 @@ class Logger:
                     
 
     @staticmethod
-    def extime(name: str, timer: int, multiply_timer: int = 1, print_msg: bool = True) -> str:
+    def extime(
+        name: str,
+        timer: int,
+        multiply_timer: int = 1,
+        print_msg: bool = True,
+        approximated_value: bool = False,
+    ) -> str:
         '''Automatic timer format (ns, µs, ms, s and mins units).
         
         Args:
@@ -75,6 +81,7 @@ class Logger:
             timer (int): Using time.perf_counter_ns() to get the starting point of the timer.
             multiply_timer (int, optional): Multiply the time by a value (To estimate time).
             print_msg (bool, optional): If True, it also prints the formatted timer message.
+            approximated_value (bool, optional): If True, adds the "~" character for an approximation.
             
         Returns:
             str: The formatted timer message
@@ -90,10 +97,10 @@ class Logger:
         if timer < powers[0]:
             res = timer
         elif powers[0] <= timer < powers[1]:
-            res = timer / powers[0]
+            res = round(timer / powers[0])
             i = 1
         elif powers[1] <= timer < powers[2]:
-            res = timer / powers[1]
+            res = round(timer / powers[1])
             i = 2
         elif powers[2] <= timer:
             res = timer / powers[2]
@@ -104,9 +111,14 @@ class Logger:
                 res = round(res / 60)
                 i = 4
         
-        output = f'{name}: {res}{units[i]}'
+        res = round(res, 2)
+        
+        if approximated_value:
+            output = f'{name}: ~{res}{units[i]}'
+        else:
+            output = f'{name}: {res}{units[i]}'
         
         if print_msg:
-            Logger.pyprint('SUCCESS', 'Extime', output, True)
+            Logger.pyprint('SUCCESS', '', output, True)
         
         return output
