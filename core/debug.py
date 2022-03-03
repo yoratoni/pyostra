@@ -116,7 +116,7 @@ class Logger:
             # Status code case   
             else:
                 if log_or_status in Logger.status_codes:
-                    output = f'[{log_or_status}] {Logger.status_codes[log_or_status[3:]]}'
+                    output = f'[{log_or_status}] {Logger.status_codes[int(log_or_status[3:])]}'
                     
                 # Non-existing status code catch
                 else:
