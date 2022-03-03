@@ -4,7 +4,7 @@ import inspect
 import time
 
 
-class Logger:
+class DebugSettings:
     # If true, print all the available logs,
     # Else, just the types defined in 'forced_types'
     verbose_debugging = True
@@ -14,9 +14,20 @@ class Logger:
     section_color = Fore.LIGHTBLUE_EX
     section_title = 'PYPRINT SECTION'
     
-    # List of debug message types
-    all_types = ['INFO', 'DATA', 'WARNING', 'ERROR', 'SUCCESS']
+    # List of debug log types and their colors in a dict
+    all_types = {
+        'INFO': Fore.LIGHTBLUE_EX,
+        'DATA': Fore.CYAN,
+        'WARNING': Fore.YELLOW,
+        'ERROR': Fore.LIGHTRED_EX,
+        'SUCCESS': Fore.LIGHTGREEN_EX
+    }
+    
+    # Debug log types that are always printed (even when verbose debugging is turned off)
     forced_types = ['WARNING', 'ERROR', 'SUCCESS']
+    
+    # Debug log types that shows the name of the function that calls pyprint()
+    function_name_types = ['WARNING', 'ERROR']
     
     # Status codes used for general errors
     # I usually use modified HTTP Status Codes
@@ -24,8 +35,9 @@ class Logger:
     status_codes = {
         42: 'Pyprint Status Example'
     }
-    
-    # Internal vars
+
+
+class Logger:
     __is_first_print = True
     
     
@@ -42,16 +54,8 @@ class Logger:
         
         color = Fore.WHITE
         
-        if log_type == Logger.all_types[0]:
-            color = Fore.LIGHTBLUE_EX 
-        elif log_type == Logger.all_types[1]:
-            color = Fore.CYAN
-        elif log_type == Logger.all_types[2]:
-            color = Fore.YELLOW
-        elif log_type == Logger.all_types[3]:
-            color = Fore.LIGHTRED_EX
-        elif log_type == Logger.all_types[4]:
-            color = Fore.LIGHTGREEN_EX
+        if log_type in DebugSettings.all_types.keys():
+            color = DebugSettings.all_types[log_type]
             
         return color
         
@@ -62,15 +66,14 @@ class Logger:
         It separates the normal console logs and pyprint() ones.
         '''
 
-        separated_title = f'{Logger.section_separators}{Logger.section_title}{Logger.section_separators}'
-        print(f'\n{Logger.section_color}{separated_title}{Style.RESET_ALL}')
+        separated_title = f'{DebugSettings.section_separators}{DebugSettings.section_title}{DebugSettings.section_separators}'
+        print(f'\n{DebugSettings.section_color}{separated_title}{Style.RESET_ALL}')
         
 
     @staticmethod
     def pyprint(
         log_type: str,
         log_or_status: str,
-        show_function_name: bool = True,
         same_line: bool = False
     ):
         '''Debug Mode formatted print statements.
@@ -86,11 +89,10 @@ class Logger:
             log_type (str): Type of the log (Unsupported title returns white colored log).
             log_or_status_code (str): Printed log message or a status code if 'ST_000'
                 where '000' is the status code integer corresponding to the one in the settings.
-            show_function_name (bool, optional): Show the name of the calling function.
             same_line (bool, optional): Print on the same line as before.
         '''
 
-        if (not Logger.verbose_debugging and log_type in Logger.forced_types) or Logger.verbose_debugging:
+        if (not DebugSettings.verbose_debugging and log_type in DebugSettings.forced_types) or DebugSettings.verbose_debugging:
             # Show the section title
             if Logger.__is_first_print:
                 Logger.__show_section_title()
@@ -103,26 +105,24 @@ class Logger:
             if not log_or_status.startswith('ST_'):
                 
                 # Basic normal output
-                if not show_function_name:
+                if log_type not in DebugSettings.function_name_types:
                     output = f'[{log_type}] {log_or_status}'
-                    
                 else:
                     # Get the function that calls pyprint
                     cur_frame = inspect.currentframe()
                     out_frame = inspect.getouterframes(cur_frame, 2)
-                    
                     output = f'[{log_type}] {out_frame[1][3]}(): {log_or_status}'
             
             # Status code case   
             else:
-                if log_or_status in Logger.status_codes:
-                    output = f'[{log_or_status}] {Logger.status_codes[int(log_or_status[3:])]}'
+                if log_or_status in DebugSettings.status_codes:
+                    output = f'[{log_or_status}] {DebugSettings.status_codes[int(log_or_status[3:])]}'
                     
                 # Non-existing status code catch
                 else:
                     color = Fore.LIGHTRED_EX
                     output = f'[PYPRINT_ERROR] Wrong status code, "{log_or_status}" does not exists'
-            
+
             # Same line handling
             if same_line:
                 print_end = '\r'
@@ -131,8 +131,8 @@ class Logger:
             
             # Final output
             print(f'{color}{output}{Style.RESET_ALL}', end=print_end)
-
-
+            
+            
     @staticmethod
     def extime(
         name: str,
