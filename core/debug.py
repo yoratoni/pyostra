@@ -29,7 +29,8 @@ class Logger:
     __is_first_print = True
     
     
-    def __get_log_color(self, log_type: str):
+    @staticmethod
+    def __get_log_color(log_type: str):
         '''Get the color of the log depending on the log type.
         
         Args:
@@ -41,30 +42,32 @@ class Logger:
         
         color = Fore.WHITE
         
-        if log_type == self.all_types[0]:
+        if log_type == Logger.all_types[0]:
             color = Fore.LIGHTBLUE_EX 
-        elif log_type == self.all_types[1]:
+        elif log_type == Logger.all_types[1]:
             color = Fore.CYAN
-        elif log_type == self.all_types[2]:
+        elif log_type == Logger.all_types[2]:
             color = Fore.YELLOW
-        elif log_type == self.all_types[3]:
+        elif log_type == Logger.all_types[3]:
             color = Fore.LIGHTRED_EX
-        elif log_type == self.all_types[4]:
+        elif log_type == Logger.all_types[4]:
             color = Fore.LIGHTGREEN_EX
             
         return color
         
     
-    def __show_section_title(self):
+    @staticmethod
+    def __show_section_title():
         '''Show the section title (printed only once).
         It separates the normal console logs and pyprint() ones.
         '''
 
-        separated_title = f'{self.section_separators}{self.section_title}{self.section_separators}'
-        print(f'\n{self.section_color}{separated_title}{Style.RESET_ALL}')
+        separated_title = f'{Logger.section_separators}{Logger.section_title}{Logger.section_separators}'
+        print(f'\n{Logger.section_color}{separated_title}{Style.RESET_ALL}')
         
 
-    def pyprint(self,
+    @staticmethod
+    def pyprint(
         log_type: str,
         log_or_status: str,
         show_function_name: bool = True,
@@ -87,14 +90,14 @@ class Logger:
             same_line (bool, optional): Print on the same line as before.
         '''
 
-        if (not self.verbose_debugging and log_type in self.forced_types) or self.verbose_debugging:
+        if (not Logger.verbose_debugging and log_type in Logger.forced_types) or Logger.verbose_debugging:
             # Show the section title
-            if self.__is_first_print:
-                self.__show_section_title()
-                self.__is_first_print = False
+            if Logger.__is_first_print:
+                Logger.__show_section_title()
+                Logger.__is_first_print = False
         
             # Get the color of the log
-            color = self.__get_log_color(log_type)
+            color = Logger.__get_log_color(log_type)
             
             # Check if it's a status code
             if not log_or_status.startswith('ST_'):
@@ -112,8 +115,8 @@ class Logger:
             
             # Status code case   
             else:
-                if log_or_status in self.status_codes:
-                    output = f'[{log_or_status}] {self.status_codes[log_or_status[3:]]}'
+                if log_or_status in Logger.status_codes:
+                    output = f'[{log_or_status}] {Logger.status_codes[log_or_status[3:]]}'
                     
                 # Non-existing status code catch
                 else:
@@ -130,7 +133,8 @@ class Logger:
             print(f'{color}{output}{Style.RESET_ALL}', end=print_end)
 
 
-    def extime(self,
+    @staticmethod
+    def extime(
         name: str,
         timer: int,
         multiply_timer: int = 1,
@@ -182,6 +186,6 @@ class Logger:
             output = f'{name}: {res}{units[i]}'
         
         if print_msg:
-            self.pyprint('SUCCESS', output)
+            Logger.pyprint('SUCCESS', output)
         
         return output
