@@ -42,25 +42,6 @@ class Logger:
     
     
     @staticmethod
-    def __get_log_color(log_type: str):
-        '''Get the color of the log depending on the log type.
-        
-        Args:
-            log_type (str): The type of the log.
-            
-        Returns:
-            str: The colorama color chars.
-        '''
-        
-        color = Fore.WHITE
-        
-        if log_type in DebugSettings.all_types.keys():
-            color = DebugSettings.all_types[log_type]
-            
-        return color
-        
-    
-    @staticmethod
     def __show_section_title():
         '''Show the section title (printed only once).
         It separates the normal console logs and pyprint() ones.
@@ -99,8 +80,11 @@ class Logger:
                 Logger.__is_first_print = False
         
             # Get the color of the log
-            color = Logger.__get_log_color(log_type)
-            
+            if log_type in DebugSettings.all_types.keys():
+                color = DebugSettings.all_types[log_type]
+            else:
+                color = Fore.WHITE
+                
             # Check if it's a status code
             if not log_or_status.startswith('ST_'):
                 
