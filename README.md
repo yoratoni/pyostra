@@ -35,7 +35,7 @@ def main():
     
 main()
 ```
-Notice that `CRITCAL`, `ERROR` and `WARN` log types also returns the calling function name,
+Notice that `CRITICAL`, `ERROR` and `WARN` log types also returns the calling function name,
 it can be disabled by using the optional `disable_function_name` argument for every log where you don't want the calling function name to show.
 
 ![](documentation/default_output.png "Pyprint example")
