@@ -1,5 +1,6 @@
-from pyostra import LogTypes, pyprint
+from pyostra import LogTypes, pyprint, set_short
 
+set_short(True)
 
 def main():
     pyprint(LogTypes.CRITICAL, 'THIS IS A TEST')
