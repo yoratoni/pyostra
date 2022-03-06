@@ -16,10 +16,11 @@ setup(
     author='Yoratoni',
     author_email='twingearas@gmail.com',
     url='https://github.com/yoratoni/pyostra',
-    license='MIT',
+    license='BSD',
     
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
+    keywords='ostra internal color colour terminal windows crossplatform',
 
     packages=[NAME],
     install_requires=['colorama', 'time', 'typing', 'inspect'],
@@ -28,7 +29,7 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python :: 3',
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: BSD License',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Topic :: Terminals'
