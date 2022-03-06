@@ -155,14 +155,14 @@ def pyprint(
     But you can also define your own log type by using the new_log_type() function.
     
     Supported log types by default:
-        - CRITICAL
-        - ERROR
-        - WARN
-        - SUCCESS
-        - SILENT
-        - READY
-        - DATA
-        - INFO
+        - [CRIT] CRITICAL
+        - [ERRO] ERROR
+        - [WARN] WARN
+        - [SCES] SUCCESS
+        - [SILT] SILENT
+        - [REDY] READY
+        - [DATA] DATA
+        - [INFO] INFO
         
     Note:
         By default, critical errors and normal errors also prints the name of the calling function,
