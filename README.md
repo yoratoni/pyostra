@@ -21,6 +21,38 @@ The goal is to simplify all the interactions with the terminal by the developers
 Note that this library will later include many other general functions, it is not specifically made for Terminal outputs only but to centralize all of the general functions that I'm using in my projects instead of copying the code everytime. I still decided to make it public so people can use it too if they want.
 
 
+## LogTypes class
+This class contains all the log types for the `pyprint()` function.
+
+It contains all of these log types by default:
+- CRITICAL
+- ERROR
+- WARN
+- SUCCESS
+- SILENT
+- READY
+- DATA
+- INFO
+
+A log type can also be created by using the `new_log_type()` function, it returns a dict with the right format.
+
+The dict used for a log type is pretty simply:
+```py
+DATA = {
+    # The default name used by the log messages
+    'longName': 'DATA',
+    
+    # Check the set_short() function doc below to understand
+    'shortName': 'DATA',
+    
+    # The color of the log type at the start
+    'typeColor': Fore.LIGHTCYAN_EX,
+    
+    # The color of the log message
+    'msgColor': Fore.LIGHTCYAN_EX
+}
+```
+
 ## Pyprint
 Default format of a Pyprint log, using the default log types:
 ```py
@@ -45,7 +77,7 @@ it can be disabled by using the optional `disable_function_name` argument for ev
 
 
 ### set_short() function
-This function allows you to reduce the log type length to 4 chars, it can be used if you have a lot of logs at the same time, for better readability.
+This function allows you to reduce the log type length to 4 chars, it can be used if you have a lot of logs at the same time, for better readability. It uses the `shortName` string key inside a log type dict.
 ```py
 import pyostra
 
@@ -87,6 +119,13 @@ In addition to that, the optional argument called `force_verbose` inside the `py
 ### new_section() function
 This simple function allows you to separate different types of log by printing a title with a bunch of separators.
 
+This function contains only optional args:
+- section_title (str, optional): The title of the current section.
+- skip_line (bool, optional): If True, skip a line before the title.
+- section_title_color (str, optional): Use Colorama for that.
+- separator_char (str, optional): The character used by the section title.
+- separators_amount (int, optional): The amount of separators for the title.
+
 ```py
 from pyostra import LogTypes, new_section, pyprint
 
@@ -94,12 +133,6 @@ def main():
     new_section('TEST SECTION', separators_amount=10)
     pyprint(LogTypes.CRITICAL, 'TEST')
 ```
-This function contains only optional args:
-- section_title (str, optional): The title of the current section.
-- skip_line (bool, optional): If True, skip a line before the title.
-- section_title_color (str, optional): Use Colorama for that (Fore.LIGHTBLUE_EX for example).
-- separator_char (str, optional): The character used by the section title (see the example).
-- separators_amount (int, optional): The amount of separators for the title.
 
 ![](documentation/new_section.png "Pyprint example")
 
