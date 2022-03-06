@@ -1,3 +1,14 @@
+'''
+Made by Yoratoni.
+Pyostra is licensed under the BSD 3-Clause "New" or "Revised" License.
+
+All rights reserved to Jonathan Hartley for the Colorama library.
+GITHUB: https://github.com/tartley/colorama
+LICENSE: https://github.com/tartley/colorama/blob/master/LICENSE.txt
+'''
+
+
+
 from inspect import currentframe, getouterframes
 from colorama import Style, Fore, init
 from typing import Any

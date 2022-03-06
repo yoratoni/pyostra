@@ -19,13 +19,13 @@ setup(
     license='BSD',
     
     description=DESCRIPTION,
+    long_description_content_type = 'text/markdown',
     long_description=LONG_DESCRIPTION,
     keywords='ostra internal color colour terminal windows crossplatform',
 
     packages=[NAME],
-    install_requires=['colorama', 'time', 'typing', 'inspect'],
-    
-    keywords='ostra',
+    install_requires=['colorama'],
+
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python :: 3',
