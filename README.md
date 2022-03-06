@@ -74,7 +74,7 @@ main()
 Notice that `CRITICAL`, `ERROR` and `WARN` log types also returns the calling function name,
 it can be disabled by using the optional `disable_function_name` argument for every log where you don't want the calling function name to show.
 
-![](documentation/default_output.png "pyprint function example")
+![](https://github.com/yoratoni/pyostra/blob/main/documentation/default_output.png "pyprint function example")
 
 
 ## set_short() function
@@ -86,7 +86,7 @@ pyostra.set_short(True)
 ```
 If not clear, all the correspondances with the full log types can be found inside the pyprint/set_short function docstring.
 
-![](documentation/set_short.png "set_short function example")
+![](https://github.com/yoratoni/pyostra/blob/main/documentation/set_short.png "set_short function example")
 
 
 ## set_verbose() function
@@ -112,7 +112,7 @@ main()
 ```
 By setting the verbose to False, only `CRITICAL`, `ERROR`, `WARN` and `SUCCESS` log types will be printed, the other ones are ignored.
 
-![](documentation/set_verbose.png "set_verbose function example")
+![](https://github.com/yoratoni/pyostra/blob/main/documentation/set_verbose.png "set_verbose function example")
 
 In addition to that, the optional argument called `force_verbose` inside the `pyprint()` function allows to you print other log types even when the verbose debugging is turned off.
 
@@ -135,7 +135,7 @@ def main():
     pyprint(LogTypes.CRITICAL, 'TEST')
 ```
 
-![](documentation/new_section.png "new_section function example")
+![](https://github.com/yoratoni/pyostra/blob/main/documentation/new_section.png "new_section function example")
 
 
 ## extime() function
@@ -164,36 +164,4 @@ for i in range(10000):
 extime('Loop execution time', timer)
 ```
 
-![](documentation/extime.png "new_section function example")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![](https://github.com/yoratoni/pyostra/blob/main/documentation/extime.png "new_section function example")
