@@ -49,10 +49,7 @@ DATA = {
     'typeColor': Fore.LIGHTCYAN_EX,
     
     # The color of the log message
-    'msgColor': Fore.LIGHTCYAN_EX,
-    
-    # Includes in forced types (print even when verbose debugging is turned off)
-    'includeInForce': False
+    'msgColor': Fore.LIGHTCYAN_EX
 }
 ```
 
