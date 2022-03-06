@@ -139,6 +139,31 @@ def main():
 
 
 ## extime() function
+This function uses the `time` core library, specifically the `time.perf_counter_ns()` function to measure the performances.
+It prints the final message into the Terminal by using the `pyprint()` function (`LogTypes.SUCCESS` type).
+
+This function contains a bunch of args:
+- timer_name (str): Name of the timer.
+- perf_counter_ns_value (int): Using time.perf_counter_ns() to get the starting value of the timer.
+- multiply_timer (int, optional): Multiply the time by a value (To estimate time for x iterations).
+- approximated_value (bool, optional): If True, adds the "~" character to show that it's an approximation.
+
+The `multiply_timer` and the `approximated_value` args can be used to estimate the time that it takes to execute a function.
+As an example, inside the [Advanced NFTs Generator](https://github.com/ostra-project/Advanced-NFTs-Generator), I'm generating an NFT 5 times in a row (for a better estimation) to measure the time that it takes, then, I set the `multiply_timer` value to the amount of NFTs that needs to be generated (divided by 5 as the measured time is for 5 NFTs). Then I set the `approximated_value` value to True, it adds the little `~` char to show that it is an estimation.
+
+```py
+from pyostra import extime
+import time
+
+timer = time.perf_counter_ns()
+
+a = 0
+for i in range(10000):
+    a += 1
+
+extime('Loop execution time', timer)
+```
+
 ![](documentation/extime.png "new_section function example")
 
 
