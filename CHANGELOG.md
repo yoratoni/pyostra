@@ -1,6 +1,8 @@
 ## Changelog
 
-### v0.1.2 (03/06/2022):
+### v0.1.4 (03/06/2022):
+- Complete refactoring.
+- README doc fully written.
 - Main pyprint functions added.
 - Now supports short log types.
 - Logging system using dictionaries.
