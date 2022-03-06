@@ -5,7 +5,7 @@ except ImportError:
 
 
 NAME = 'pyostra'
-VERSION = '0.1.3'
+VERSION = '0.1.4'
 DESCRIPTION = 'THe internal Python package used for the Ostra projects such as the advanced NFTs generator.'
 LONG_DESCRIPTION = open('README.md').read() + '\n\n' + open('CHANGELOG.md').read()
 
