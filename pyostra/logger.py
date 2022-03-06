@@ -83,7 +83,7 @@ def new_log_type(
     long_name: str,
     short_name: str,
     type_color: str = Fore.WHITE,
-    msg_color: str = Fore.WHITE,
+    msg_color: str = Fore.WHITE
 ) -> dict:
     '''Allows to define a new log type as a dict,
     The value is returned and can be saved into a type var.
@@ -104,6 +104,7 @@ def new_log_type(
         'typeColor': type_color,
         'msgColor': msg_color
     }
+    
 
 
 def new_section(
