@@ -3,6 +3,7 @@ Custom terminal colored logging system developed for the [Advanced NFTs Generato
 
 [PyPI for releases](https://pypi.org/project/pyostra/) | [Github for source](https://github.com/yoratoni/pyostra)
 
+
 ## Installation
 Developed for Python 3.9, normally supports CPython 2.7 => 3.10 | Pypy 2.7 and 3.6.
 
@@ -12,11 +13,13 @@ Only requirement other than the standard library is [Colorama](https://github.co
 pîp install pyostra
 ```
 
+
 ## Description
 Pyostra is the main central library used for my own projects such as the [Advanced NFTs Generator](https://github.com/ostra-project/Advanced-NFTs-Generator). This library allows custom colored and formatted outputs in the Terminal.
 The goal is to simplify all the interactions with the terminal by the developers such as try / except errors etc..
 
 Note that this library will later include many other general functions, it is not specifically made for Terminal outputs only but to centralize all of the general functions that I'm using in my projects instead of copying the code everytime. I still decided to make it public so people can use it too if they want.
+
 
 ## Pyprint
 Default format of a Pyprint log, using the default log types:
@@ -40,6 +43,7 @@ it can be disabled by using the optional `disable_function_name` argument for ev
 
 ![](documentation/default_output.png "Pyprint example")
 
+
 ### set_short() function
 This function allows you to reduce the log type length to 4 chars, it can be used if you have a lot of logs at the same time, for better readability.
 ```py
@@ -50,6 +54,7 @@ pyostra.set_short(True)
 If not clear, all the correspondances with the full log types can be found inside the pyprint/set_short function docstring.
 
 ![](documentation/set_short.png "Pyprint example")
+
 
 ### set_verbose() function
 This function allows to you to reduce the amount of logs inside the Terminal by ignoring some log types.
@@ -77,3 +82,58 @@ By setting the verbose to False, only `CRITICAL`, `ERROR`, `WARN` and `SUCCESS` 
 ![](documentation/set_verbose.png "Pyprint example")
 
 In addition to that, the optional argument called `force_verbose` inside the `pyprint()` function allows to you print other log types even when the verbose debugging is turned off.
+
+
+### new_section() function
+This simple function allows you to separate different types of log by printing a title with a bunch of separators.
+
+```py
+from pyostra import LogTypes, new_section, pyprint
+
+def main():
+    new_section('TEST SECTION', separators_amount=10)
+    pyprint(LogTypes.CRITICAL, 'TEST')
+```
+This function contains only optional args:
+- section_title (str, optional): The title of the current section.
+- skip_line (bool, optional): If True, skip a line before the title.
+- section_title_color (str, optional): Use Colorama for that (Fore.LIGHTBLUE_EX for example).
+- separator_char (str, optional): The character used by the section title (see the example).
+- separators_amount (int, optional): The amount of separators for the title.
+
+![](documentation/new_section.png "Pyprint example")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
