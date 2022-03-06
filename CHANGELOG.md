@@ -1,6 +1,18 @@
-PYOSTRA CHANGELOG
-=================
+## Changelog
 
-0.0.1 (03/05/2022)
+### 0.1.2 (03/06/2022)
+- Main pyprint functions added.
+- Now supports short log types.
+- Logging system using dictionaries.
+- Functions docstring added.
+- Extime function refactored.
+
+### 0.1.1 (03/05/2022)
+------------------
+- Package setup updated.
+- Required packages updated.
+- General refactoring.
+
+### 0.0.1 (03/05/2022)
 ------------------
 - First release of the pyostra package.

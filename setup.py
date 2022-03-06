@@ -1,32 +1,37 @@
-from setuptools import setup, find_packages
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
 
-__description__ = 'THe internal Python package used for the Ostra projects such as the advanced NFTs generator.'
-__long_description__ = open('README.md').read() + '\n\n' + open('CHANGELOG.md').read()
-__classifiers__ = [
-    'Development Status :: 5 - Production/Stable',
-    'Programming Language :: Python :: 3',
-    'License :: OSI Approved :: MIT License',
-    'Intended Audience :: Developers',
-    'Operating System :: Microsoft :: Windows',
-    'Topic :: Utilities'
-]
+NAME = 'pyostra'
+VERSION = '0.1.2'
+DESCRIPTION = 'THe internal Python package used for the Ostra projects such as the advanced NFTs generator.'
+LONG_DESCRIPTION = open('README.md').read() + '\n\n' + open('CHANGELOG.md').read()
 
 
 setup(
-    name='pyostra',
-    version='0.1.1',
+    name=NAME,
+    version=VERSION,
     author='Yoratoni',
     author_email='twingearas@gmail.com',
+    url='https://github.com/yoratoni/pyostra',
     license='MIT',
     
-    description=__description__,
-    long_description_content_type='text/markdown',
-    long_description=__long_description__,
+    description=DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
 
-    packages=find_packages(),
-    install_requires=['colorama'],
+    packages=[NAME],
+    install_requires=['colorama', 'time', 'typing', 'inspect'],
     
     keywords='ostra',
-    classifiers=__classifiers__
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: Implementation :: PyPy',
+        'License :: OSI Approved :: MIT License',
+        'Intended Audience :: Developers',
+        'Operating System :: OS Independent',
+        'Topic :: Terminals'
+    ]
 )
