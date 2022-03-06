@@ -10,7 +10,7 @@ Developed for Python 3.9, normally supports CPython 2.7 => 3.10 | Pypy 2.7 and 3
 Only requirement other than the standard library is [Colorama](https://github.com/tartley/colorama), this package have the same Python / platform requirements.
 
 ```
-pîp install pyostra
+pip install pyostra
 ```
 
 
