@@ -21,6 +21,41 @@ The goal is to simplify all the interactions with the terminal by the developers
 Note that this library will later include many other general functions, it is not specifically made for Terminal outputs only but to centralize all of the general functions that I'm using in my projects instead of copying the code everytime. I still decided to make it public so people can use it too if they want.
 
 
+## LogTypes class
+This class contains all the log types for the `pyprint()` function.
+
+It contains all of these log types by default:
+- CRITICAL
+- ERROR
+- WARN
+- SUCCESS
+- SILENT
+- READY
+- DATA
+- INFO
+
+A log type can also be created by using the `new_log_type()` function, it returns a dict with the right format.
+
+The dict used for a log type is pretty simply:
+```py
+DATA = {
+    # The default name used by the log messages
+    'longName': 'DATA',
+    
+    # Check the set_short() function doc below to understand
+    'shortName': 'DATA',
+    
+    # The color of the log type at the start
+    'typeColor': Fore.LIGHTCYAN_EX,
+    
+    # The color of the log message
+    'msgColor': Fore.LIGHTCYAN_EX,
+    
+    # Includes in forced types (print even when verbose debugging is turned off)
+    'includeInForce': False
+}
+```
+
 ## Pyprint
 Default format of a Pyprint log, using the default log types:
 ```py
@@ -45,7 +80,7 @@ it can be disabled by using the optional `disable_function_name` argument for ev
 
 
 ### set_short() function
-This function allows you to reduce the log type length to 4 chars, it can be used if you have a lot of logs at the same time, for better readability.
+This function allows you to reduce the log type length to 4 chars, it can be used if you have a lot of logs at the same time, for better readability. It uses the `shortName` string key inside a log type dict.
 ```py
 import pyostra
 
