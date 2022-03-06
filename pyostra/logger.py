@@ -146,8 +146,8 @@ def __internal_error(log_msg: str):
 def pyprint(
     log_type: dict,
     log_msg: Any,
-    on_same_line: bool = False,
-    disable_function_name: bool = False
+    disable_function_name: bool = False,
+    on_same_line: bool = False
 ):
     '''Pyostra formatted print statements.
     
@@ -171,18 +171,18 @@ def pyprint(
     Args:
         log_type (str): Type of the log (Unsupported log type returns white colored log).
         log_msg (str): The main message of the log.
-        on_same_line (bool, optional): Print on the same line as before.
         disable_function_name (bool, optional): Allows to specifically disable the printing
             of the caller's name for errors & warnings.
+        on_same_line (bool, optional): Print on the same line as before.
     '''
     
     # Verbose debugging or forced log type
     if __Settings.VERBOSE_DEBUGGING or (not __Settings.VERBOSE_DEBUGGING and log_type in __Settings.FORCED_TYPES):
         # Validate the log_type dict
         if type(log_type) == dict:
-            if set(('shortName', 'longName', 'fore', 'back')) <= log_type.keys():
-                short_name = log_type['shortName']
+            if set(('longName', 'shortName', 'typeColor', 'msgColor')) <= log_type.keys():
                 long_name = log_type['longName']
+                short_name = log_type['shortName']
                 type_color = log_type['typeColor']
                 msg_color = log_type['msgColor']
             else:
