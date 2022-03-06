@@ -6,6 +6,7 @@
 - Logging system using dictionaries.
 - Functions docstring added.
 - Extime function refactored.
+- Arguments & docstring refactoring.
 
 ### v0.1.1 (03/05/2022):
 - Package setup updated.
