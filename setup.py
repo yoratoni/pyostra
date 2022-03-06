@@ -28,7 +28,6 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: Implementation :: PyPy',
         'License :: OSI Approved :: MIT License',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
