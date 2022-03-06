@@ -127,7 +127,7 @@ def new_section(
         skip_line (bool, optional): If True, skip a line before the title.
         section_title_color (str, optional): Use Colorama for that (Fore.LIGHTBLUE_EX for example).
         separator_char (str, optional): The character used by the section title (see the example).
-        separators_amount (int, optional): The amount of separators for the title
+        separators_amount (int, optional): The amount of separators for the title.
     '''
     
     separators = separator_char * separators_amount
