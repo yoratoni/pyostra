@@ -87,6 +87,13 @@ In addition to that, the optional argument called `force_verbose` inside the `py
 ### new_section() function
 This simple function allows you to separate different types of log by printing a title with a bunch of separators.
 
+This function contains only optional args:
+- section_title (str, optional): The title of the current section.
+- skip_line (bool, optional): If True, skip a line before the title.
+- section_title_color (str, optional): Use Colorama for that.
+- separator_char (str, optional): The character used by the section title.
+- separators_amount (int, optional): The amount of separators for the title.
+
 ```py
 from pyostra import LogTypes, new_section, pyprint
 
@@ -94,12 +101,6 @@ def main():
     new_section('TEST SECTION', separators_amount=10)
     pyprint(LogTypes.CRITICAL, 'TEST')
 ```
-This function contains only optional args:
-- section_title (str, optional): The title of the current section.
-- skip_line (bool, optional): If True, skip a line before the title.
-- section_title_color (str, optional): Use Colorama for that (Fore.LIGHTBLUE_EX for example).
-- separator_char (str, optional): The character used by the section title (see the example).
-- separators_amount (int, optional): The amount of separators for the title.
 
 ![](documentation/new_section.png "Pyprint example")
 
