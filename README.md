@@ -40,7 +40,7 @@ it can be disabled by using the optional `disable_function_name` argument for ev
 
 ![](documentation/default_output.png "Pyprint example")
 
-## set_short() function
+### set_short() function
 This function allows you to reduce the log type length to 4 chars, it can be used if you have a lot of logs at the same time, for better readability.
 ```py
 import pyostra
@@ -51,7 +51,7 @@ If not clear, all the correspondances with the full log types can be found insid
 
 ![](documentation/set_short.png "Pyprint example")
 
-## set_verbose() function
+### set_verbose() function
 This function allows to you to reduce the amount of logs inside the Terminal by ignoring some log types.
 ```py
 from pyostra import LogTypes, pyprint, set_verbose
