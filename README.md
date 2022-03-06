@@ -53,7 +53,8 @@ DATA = {
 }
 ```
 
-## Pyprint
+
+## pyprint() function
 Default format of a Pyprint log, using the default log types:
 ```py
 from pyostra import LogTypes, pyprint
@@ -73,10 +74,10 @@ main()
 Notice that `CRITICAL`, `ERROR` and `WARN` log types also returns the calling function name,
 it can be disabled by using the optional `disable_function_name` argument for every log where you don't want the calling function name to show.
 
-![](documentation/default_output.png "Pyprint example")
+![](documentation/default_output.png "pyprint function example")
 
 
-### set_short() function
+## set_short() function
 This function allows you to reduce the log type length to 4 chars, it can be used if you have a lot of logs at the same time, for better readability. It uses the `shortName` string key inside a log type dict.
 ```py
 import pyostra
@@ -85,10 +86,10 @@ pyostra.set_short(True)
 ```
 If not clear, all the correspondances with the full log types can be found inside the pyprint/set_short function docstring.
 
-![](documentation/set_short.png "Pyprint example")
+![](documentation/set_short.png "set_short function example")
 
 
-### set_verbose() function
+## set_verbose() function
 This function allows to you to reduce the amount of logs inside the Terminal by ignoring some log types.
 ```py
 from pyostra import LogTypes, pyprint, set_verbose
@@ -111,12 +112,12 @@ main()
 ```
 By setting the verbose to False, only `CRITICAL`, `ERROR`, `WARN` and `SUCCESS` log types will be printed, the other ones are ignored.
 
-![](documentation/set_verbose.png "Pyprint example")
+![](documentation/set_verbose.png "set_verbose function example")
 
 In addition to that, the optional argument called `force_verbose` inside the `pyprint()` function allows to you print other log types even when the verbose debugging is turned off.
 
 
-### new_section() function
+## new_section() function
 This simple function allows you to separate different types of log by printing a title with a bunch of separators.
 
 This function contains only optional args:
@@ -134,10 +135,36 @@ def main():
     pyprint(LogTypes.CRITICAL, 'TEST')
 ```
 
-![](documentation/new_section.png "Pyprint example")
+![](documentation/new_section.png "new_section function example")
 
 
+## extime() function
+This function uses the `time` core library, specifically the `time.perf_counter_ns()` function to measure the performances.
+It prints the final message into the Terminal by using the `pyprint()` function (`LogTypes.SUCCESS` type).
 
+This function contains a bunch of args:
+- timer_name (str): Name of the timer.
+- perf_counter_ns_value (int): Using time.perf_counter_ns() to get the starting value of the timer.
+- multiply_timer (int, optional): Multiply the time by a value (To estimate time for x iterations).
+- approximated_value (bool, optional): If True, adds the "~" character to show that it's an approximation.
+
+The `multiply_timer` and the `approximated_value` args can be used to estimate the time that it takes to execute a function.
+As an example, inside the [Advanced NFTs Generator](https://github.com/ostra-project/Advanced-NFTs-Generator), I'm generating an NFT 5 times in a row (for a better estimation) to measure the time that it takes, then, I set the `multiply_timer` value to the amount of NFTs that needs to be generated (divided by 5 as the measured time is for 5 NFTs). Then I set the `approximated_value` value to True, it adds the little `~` char to show that it is an estimation.
+
+```py
+from pyostra import extime
+import time
+
+timer = time.perf_counter_ns()
+
+a = 0
+for i in range(10000):
+    a += 1
+
+extime('Loop execution time', timer)
+```
+
+![](documentation/extime.png "new_section function example")
 
 
 
