@@ -1,5 +1,5 @@
 from inspect import currentframe, getouterframes
-from colorama import Style, Back, Fore, init
+from colorama import Style, Fore, init
 from typing import Any
 import time
 
@@ -19,14 +19,14 @@ class LogTypes():
         - [INFO] INFO
     '''
 
-    CRITICAL = {'longName': 'CRITICAL',  'shortName': 'CRIT',    'fore': Fore.LIGHTRED_EX,     'back': Fore.LIGHTRED_EX,}
-    ERROR =    {'longName': 'ERROR',     'shortName': 'ERRO',    'fore': Fore.RED,             'back': Fore.RED}
-    WARN =     {'longName': 'WARN',      'shortName': 'WARN',    'fore': Fore.YELLOW,          'back': Fore.YELLOW}
-    SUCCESS =  {'longName': 'SUCCESS',   'shortName': 'SCES',    'fore': Fore.LIGHTGREEN_EX,   'back': Fore.LIGHTGREEN_EX}
-    SILENT =   {'longName': 'SILENT',    'shortName': 'SILT',    'fore': Fore.LIGHTBLACK_EX,   'back': Fore.LIGHTBLACK_EX}
-    READY =    {'longName': 'READY',     'shortName': 'REDY',    'fore': Fore.LIGHTMAGENTA_EX, 'back': Fore.LIGHTMAGENTA_EX}
-    DATA =     {'longName': 'DATA',      'shortName': 'DATA',    'fore': Fore.LIGHTCYAN_EX,    'back': Fore.LIGHTCYAN_EX}
-    INFO =     {'longName': 'INFO',      'shortName': 'INFO',    'fore': Fore.LIGHTBLUE_EX,    'back': Fore.LIGHTBLUE_EX}
+    CRITICAL = {'longName': 'CRITICAL', 'shortName': 'CRIT', 'typeColor': Fore.LIGHTRED_EX,     'msgColor': Fore.LIGHTRED_EX}
+    ERROR    = {'longName': 'ERROR',    'shortName': 'ERRO', 'typeColor': Fore.RED,             'msgColor': Fore.RED}
+    WARN     = {'longName': 'WARN',     'shortName': 'WARN', 'typeColor': Fore.YELLOW,          'msgColor': Fore.YELLOW}
+    SUCCESS  = {'longName': 'SUCCESS',  'shortName': 'SCES', 'typeColor': Fore.LIGHTGREEN_EX,   'msgColor': Fore.LIGHTGREEN_EX}
+    SILENT   = {'longName': 'SILENT',   'shortName': 'SILT', 'typeColor': Fore.LIGHTBLACK_EX,   'msgColor': Fore.LIGHTBLACK_EX}
+    READY    = {'longName': 'READY',    'shortName': 'REDY', 'typeColor': Fore.LIGHTMAGENTA_EX, 'msgColor': Fore.LIGHTMAGENTA_EX}
+    DATA     = {'longName': 'DATA',     'shortName': 'DATA', 'typeColor': Fore.LIGHTCYAN_EX,    'msgColor': Fore.LIGHTCYAN_EX}
+    INFO     = {'longName': 'INFO',     'shortName': 'INFO', 'typeColor': Fore.LIGHTBLUE_EX,    'msgColor': Fore.LIGHTBLUE_EX}
     
 
 class __Settings:
@@ -82,23 +82,17 @@ def set_short(state: bool):
 def new_log_type(
     long_name: str,
     short_name: str,
-    fore_color: str = Fore.WHITE,
-    back_color: str = Fore.BLACK
+    type_color: str = Fore.WHITE,
+    msg_color: str = Fore.WHITE,
 ) -> dict:
     '''Allows to define a new log type as a dict,
     The value is returned and can be saved into a type var.
     
-    Note:
-        - The "back_color" arg can also be defined with a colorama 'Fore.' color.
-        - Same thing for the "fore_color" arg, you can use a colorama 'Back.' color.
-        - The "back_color" is only used for the log type at the start of the print statement.
-        - The "fore_color" is used for the log message after the log type.
-    
     Args:
         long_name (str): The long version of the log type name (Used by default).
         short_name (str): The short version of the log type name (if set_short(True)).
-        fore_color (Fore.COLOR, optional): The main foreground color.
-        back_color (Back.COLOR, optional): The main background color. 
+        msg_color (Back.COLOR / Fore.COLOR, optional): Color of the message itself.
+        type_color (Back.COLOR / Fore.COLOR, optional): Color of the type that comes before the msg.
     
     Returns:
         dict: A logtype dict.
@@ -107,8 +101,8 @@ def new_log_type(
     return {
         'longName': long_name,
         'shortName': short_name,
-        'fore': fore_color,
-        'back': back_color
+        'typeColor': type_color,
+        'msgColor': msg_color
     }
 
 
@@ -189,8 +183,8 @@ def pyprint(
             if set(('shortName', 'longName', 'fore', 'back')) <= log_type.keys():
                 short_name = log_type['shortName']
                 long_name = log_type['longName']
-                fore_color = log_type['fore']
-                back_color = log_type['back']
+                type_color = log_type['typeColor']
+                msg_color = log_type['msgColor']
             else:
                 __internal_error(f'Invalid log type key error: {log_type}')
                 return
@@ -227,8 +221,8 @@ def pyprint(
         
         # Final print statement
         init(True)
-        log_title = f'{back_color}[{log_type_name}]'
-        print(f'{log_title}{fore_color}{function_name} {log_msg}', end=end_char)
+        log_title = f'{type_color}[{log_type_name}]'
+        print(f'{log_title}{msg_color}{function_name} {log_msg}', end=end_char)
 
 
 def extime(
