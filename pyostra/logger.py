@@ -147,7 +147,8 @@ def pyprint(
     log_type: dict,
     log_msg: Any,
     disable_function_name: bool = False,
-    on_same_line: bool = False
+    on_same_line: bool = False,
+    force_verbose: bool = False
 ):
     '''Pyostra formatted print statements.
     
@@ -174,10 +175,15 @@ def pyprint(
         disable_function_name (bool, optional): Allows to specifically disable the printing
             of the caller's name for errors & warnings.
         on_same_line (bool, optional): Print on the same line as before.
+        force_verbose (bool, optional): Force the log inside the terminal,
+            not depending on the log type when verbose debugging is turned off.
     '''
     
-    # Verbose debugging or forced log type
-    if __Settings.VERBOSE_DEBUGGING or (not __Settings.VERBOSE_DEBUGGING and log_type in __Settings.FORCED_TYPES):
+    # Verbose debugging, forced log type or forced verbose
+    if (__Settings.VERBOSE_DEBUGGING
+        or (not __Settings.VERBOSE_DEBUGGING and log_type in __Settings.FORCED_TYPES)
+        or force_verbose
+    ):
         # Validate the log_type dict
         if type(log_type) == dict:
             if set(('longName', 'shortName', 'typeColor', 'msgColor')) <= log_type.keys():
