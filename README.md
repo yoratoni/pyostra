@@ -1,4 +1,4 @@
-# Pyostra Package
+# Pyostra
 Custom terminal colored logging system developed for the [Advanced NFTs Generator](https://github.com/ostra-project/Advanced-NFTs-Generator) and maintained for future projects.
 
 [PyPI for releases](https://pypi.org/project/pyostra/) | [Github for source](https://github.com/yoratoni/pyostra)
